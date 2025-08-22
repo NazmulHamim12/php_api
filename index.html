@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+  <form id="myForm">
+    <input type="text" id="nameInput" name="name" placeholder="Enter your name">
+    <button type="submit">Submit</button>
+  </form>
+
+
+
+
+  <script>
+    let url = "http://localhost/api_tutorial/api.php";
+
+    // form submit event ধরছি
+    document.getElementById("myForm").addEventListener("submit", async function(e) {
+        e.preventDefault(); // default form submit (page reload) বন্ধ করলাম
+
+        let name = document.getElementById("nameInput").value;
+
+        if(name === ""){
+          alert("Please enter a name");
+          return;
+        }
+
+
+
+
+
+        // POST request পাঠাচ্ছি
+let formData = new FormData();
+formData.append("name", name);
+
+let res = await fetch(url, {
+  method: "POST",
+  body: formData   // JSON নয়, form-data পাঠাচ্ছি
+});
+
+//console.log(res);
+
+p_data=await res.json();
+console.log(p_data.name_received);
+
+});
+  </script>
+
+
+</body>
+</html>
